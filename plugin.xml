@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<extension point="org.eclipse.core.resources.markers" id="opencl_validator.marker" name="OpenCL error marker">
+	<super type="org.eclipse.core.resources.marker"/>
+	<persistent value="false"/><attribute name="description"/>
+</extension>
+</plugin>
