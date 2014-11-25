@@ -1,4 +1,4 @@
-package opencl_validator;
+package hu.ngms.opencl.editor;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Shell;

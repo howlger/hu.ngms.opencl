@@ -1,4 +1,4 @@
-package opencl_validator;
+package hu.ngms.opencl.editor;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;

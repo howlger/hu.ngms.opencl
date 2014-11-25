@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: OpenCL Validator
 Bundle-SymbolicName: hu.ngms.opencl.editor;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: opencl_validator.Activator
+Bundle-Activator: hu.ngms.opencl.editor.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources;bundle-version="3.9.1",

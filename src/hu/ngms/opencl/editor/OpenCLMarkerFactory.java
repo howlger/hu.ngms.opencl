@@ -1,4 +1,4 @@
-package opencl_validator;
+package hu.ngms.opencl.editor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
