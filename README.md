@@ -1,7 +1,4 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
-
-### What is this repository for? ###
-
-* This plugin registers a content type for OpenCL kernel source files and validate kernel code using pre-defined validation rules.
+* This plugin creates an editor for OpenCL kernel source (based on the CDT C editor),
+  registers a content type for OpenCL kernel source files and validate kernel code using pre-defined validation rules.

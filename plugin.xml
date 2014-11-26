@@ -2,18 +2,24 @@
 <?eclipse version="3.4"?>
 <plugin>
 	<extension point="org.eclipse.core.contenttype.contentTypes"> 
-      <content-type id="hu.ngms.opencl.cl_contenttype" name="OpenCL kernel source" base-type="org.eclipse.core.runtime.text" file-extensions="cl"/>
-   </extension> 
-
+		<content-type id="hu.ngms.opencl.cl_contenttype" name="OpenCL kernel source"
+			base-type="org.eclipse.core.runtime.text" file-extensions="cl"/>
+	</extension> 
+	
 	<extension point="org.eclipse.ui.editors">
-	   <editor name="OpenCL editor"
-		   		class="org.eclipse.cdt.internal.ui.editor.CEditor"
-		        id="hu.ngms.opencl.OpenCLEditor">
-	        <contentTypeBinding contentTypeId="hu.ngms.opencl.cl_contenttype">
-		</contentTypeBinding>
-	   </editor>
-	</extension>	
-
+		<editor name="OpenCL editor" class="org.eclipse.cdt.internal.ui.editor.CEditor"
+				id="hu.ngms.opencl.editor">
+			<contentTypeBinding contentTypeId="hu.ngms.opencl.cl_contenttype"/>
+	   	</editor>
+	</extension>
+	
+	 <extension point="org.eclipse.cdt.core.language">
+         <language class="hu.ngms.opencl.editor.OpenCLLanguage" id="gcc" name="GNU CPPN">
+           <contentType id="org.eclipse.cdt.core.cSource"/>
+           <contentType id="org.eclipse.cdt.core.cHeader"/>
+      </language>
+   </extension>
+	
 	<extension point="org.eclipse.core.resources.markers" id="hu.ngms.opencl.textmarker" name="OpenCL Marker">
 		<super type="org.eclipse.core.resources.textmarker"/>
 		<super type="org.eclipse.core.resources.marker"/>

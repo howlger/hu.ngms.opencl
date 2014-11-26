@@ -14,10 +14,9 @@ import org.eclipse.ui.PlatformUI;
 public class OpenCLMarkerFactory {
 
 	public static IMarker createMarker(IResource res) throws CoreException {
-		IMarker marker = null;
-		marker = res.createMarker(Activator.PLUGIN_ID);
+		IMarker marker = res.createMarker(Activator.PLUGIN_ID);
 		marker.setAttribute("description", "OpenCL marker");
-		marker.setAttribute(IMarker.MESSAGE, "OpenCL marker");
+		marker.setAttribute(IMarker.MESSAGE, "OpenCL error");
 		return marker;
 	}
 
@@ -38,7 +37,6 @@ public class OpenCLMarkerFactory {
 	}
 
 	public static TreeSelection getTreeSelection() {
-
 		ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getSelectionService()
 				.getSelection();
 		if (selection instanceof TreeSelection) {

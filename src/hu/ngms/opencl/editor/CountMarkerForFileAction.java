@@ -11,9 +11,9 @@ import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
-public class CountMarkerForFile implements IEditorActionDelegate {
+public class CountMarkerForFileAction implements IEditorActionDelegate {
 
-	public CountMarkerForFile() {
+	public CountMarkerForFileAction() {
 		super();
 	}
 

@@ -12,9 +12,9 @@ import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.ui.IEditorActionDelegate;
 import org.eclipse.ui.IEditorPart;
 
-public class CountMarkersForFiles implements IEditorActionDelegate {
+public class CountMarkersForFilesAction implements IEditorActionDelegate {
 
-	public CountMarkersForFiles() {
+	public CountMarkersForFilesAction() {
 		super();
 	}
 
