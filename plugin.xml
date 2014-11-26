@@ -7,10 +7,10 @@
 
 	<extension point="org.eclipse.ui.editors">
 	   <editor name="OpenCL editor"
-	   contributorClass="hu.ngms.opencl.editor.EditorValidationContributor"
-	           id="hu.ngms.opencl.OpenCLEditor">
-	      <contentTypeBinding contentTypeId="hu.ngms.opencl.cl_contenttype">
-	      </contentTypeBinding>
+		   		class="org.eclipse.cdt.internal.ui.editor.CEditor"
+		        id="hu.ngms.opencl.OpenCLEditor">
+	        <contentTypeBinding contentTypeId="hu.ngms.opencl.cl_contenttype">
+		</contentTypeBinding>
 	   </editor>
 	</extension>	
 
