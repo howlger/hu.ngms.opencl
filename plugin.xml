@@ -20,9 +20,13 @@
       </language>
    </extension>
 	
-	<extension point="org.eclipse.core.resources.markers" id="hu.ngms.opencl.textmarker" name="OpenCL Marker">
-		<super type="org.eclipse.core.resources.textmarker"/>
-		<super type="org.eclipse.core.resources.marker"/>
-		<persistent value="true"/>
+ 	<extension point="org.eclipse.cdt.codan.core.checkers">
+     	<checker class="hu.ngms.opencl.editor.checkers.MemorySpaceChecker"
+        		id="hu.ngms.opencl.editor.checkers.memory_space"
+           		name="Incorrect use of memory spaces">
+        	<problem defaultSeverity="Warning" id="hu.ngms.opencl.editor.checkers.cast_to_wrong_memory_space"
+           			name="Cast to wrong memory space">
+        </problem>
+    	</checker>
 	</extension>
 </plugin>
