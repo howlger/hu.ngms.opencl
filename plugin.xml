@@ -15,8 +15,7 @@
 	
 	 <extension point="org.eclipse.cdt.core.language">
          <language class="hu.ngms.opencl.editor.OpenCLLanguage" id="gcc" name="GNU CPPN">
-           <contentType id="org.eclipse.cdt.core.cSource"/>
-           <contentType id="org.eclipse.cdt.core.cHeader"/>
+           <contentType id="hu.ngms.opencl.cl_contenttype"/>
       </language>
    </extension>
 	
