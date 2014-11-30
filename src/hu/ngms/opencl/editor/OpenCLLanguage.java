@@ -1,12 +1,17 @@
 package hu.ngms.opencl.editor;
 
+import java.util.Arrays;
+import java.util.stream.Stream;
+
 import org.eclipse.cdt.core.dom.ast.gnu.c.GCCLanguage;
 import org.eclipse.cdt.core.model.ICLanguageKeywords;
 
 public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords {
 
-	private String[] keywords = new String[] { "global", "local", "constant", "kernel", "private" };
-	private String[] types = new String[] { "bool" };
+	private String[] keywords = new String[] {
+			"__global", "global", "__local", "local", "__constant", "constant", "__private", "private",
+			"__kernel", "kernel", "__read_only", "read_only", "__write_only", "write_only", "__read_write", "read_write" };
+	private String[] types = new String[] { "bool", "half" };
 
 	@Override
 	public Object getAdapter(Class adapter) {
@@ -18,7 +23,7 @@ public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords {
 
 	@Override
 	public String[] getKeywords() {
-		return keywords;
+		return Stream.concat(Arrays.stream(super.getKeywords()), Arrays.stream(keywords)).toArray(String[]::new);
 	}
 
 	/**
@@ -28,7 +33,7 @@ public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords {
 	 */
 	@Override
 	public String[] getBuiltinTypes() {
-		return types;
+		return Stream.concat(Arrays.stream(super.getBuiltinTypes()), Arrays.stream(types)).toArray(String[]::new);
 	}
 
 	/**
@@ -38,7 +43,7 @@ public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords {
 	 */
 	@Override
 	public String[] getPreprocessorKeywords() {
-		return new String[0];
+		return super.getPreprocessorKeywords();
 	}
 
 }
