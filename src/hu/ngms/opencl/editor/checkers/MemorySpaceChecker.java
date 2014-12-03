@@ -1,9 +1,14 @@
 package hu.ngms.opencl.editor.checkers;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.eclipse.cdt.codan.core.cxx.model.AbstractIndexAstChecker;
-import org.eclipse.cdt.core.dom.ast.IASTCastExpression;
+import org.eclipse.cdt.core.dom.ast.IASTCompoundStatement;
 import org.eclipse.cdt.core.dom.ast.IASTDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTDeclarationStatement;
+import org.eclipse.cdt.core.dom.ast.IASTDeclarator;
+import org.eclipse.cdt.core.dom.ast.IASTDoStatement;
 import org.eclipse.cdt.core.dom.ast.IASTExpressionStatement;
 import org.eclipse.cdt.core.dom.ast.IASTForStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
@@ -21,6 +26,9 @@ import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
  *
  */
 public class MemorySpaceChecker extends AbstractIndexAstChecker {
+	
+	private Map<String, String> declarations;
+	private int level;
 
 	/**
 	 * Note that this is/must be the same checker-id as defined in plugin.xml
@@ -29,9 +37,10 @@ public class MemorySpaceChecker extends AbstractIndexAstChecker {
 
 	@Override
 	public void processAst(IASTTranslationUnit ast) {
+		declarations = new ConcurrentHashMap<String, String>();
+		
 		IASTDeclaration firstDecl = ast.getDeclarations()[0];
 		if (firstDecl instanceof IASTFunctionDefinition) {
-			System.out.println(CHECKER_ID + ": " + firstDecl);
 			IASTFunctionDefinition funcDecl = (IASTFunctionDefinition) firstDecl;
 			check(funcDecl.getBody());
 		}
@@ -41,35 +50,34 @@ public class MemorySpaceChecker extends AbstractIndexAstChecker {
 		check(body.getChildren());
 	}
 
+	// TODO check if memory space of the declared variable is different from the memory space of the right value
+	// TODO check if memory space of the cast is different from the memory space of the right value
 	private void check(IASTNode[] children) {
 		for (IASTNode node: children) {
-			System.out.println("NODE: " + node);
-			if (node instanceof IASTDeclarationStatement) {
-				IASTDeclaration[] decls = node.getTranslationUnit().getDeclarations();
-				for (IASTDeclaration decl : decls) {
-					IASTDeclaration d = (IASTDeclaration) decl;
-					System.out.println("DECL: " + decl);
-					// TODO check if memory space of the declared variable is different from the memory space of the right value
-					reportProblem("hu.ngms.opencl.editor.checkers.assignment_to_wrong_memory_space", d, d.getRawSignature());
-				}
-			} else if (node instanceof IASTIfStatement) {
-				System.out.println("IF: " + node);
-				check(((IASTIfStatement) node).getThenClause());
-				if (((IASTIfStatement) node).getElseClause() != null) {
-					System.out.println("ELSE: " + node);
-					check(((IASTIfStatement) node).getElseClause());
-				}
-			} else if (node instanceof IASTWhileStatement || node instanceof IASTForStatement) {
-				System.out.println("ITERATION: " + node);
-				check(node.getChildren());
-			} else if (node instanceof IASTExpressionStatement) {
-				System.out.println("EXPR: " + node);
-				check(node.getChildren());
-			} else if (node instanceof IASTCastExpression) {
-				// TODO check if memory space of the cast is different from the memory space of the right value
-				System.out.println("CAST: " + node);
+			for (int i = 0; i < level; i++) {
+				System.out.print("  ");
 			}
+			level++;
+			if (node instanceof IASTDeclarationStatement) {
+				System.out.println("DECL: " + node.toString());
+			} else if (node instanceof IASTIfStatement) {
+				System.out.println("IF: " + node.toString());
+			} else if (node instanceof IASTWhileStatement || node instanceof IASTForStatement || node instanceof IASTDoStatement) {
+				System.out.println("ITERATION: " + node.toString());
+			} else if (node instanceof IASTCompoundStatement) {
+				System.out.println("COMPOUND STMT: " + node.toString());
+			} else if (node instanceof IASTExpressionStatement) {
+				System.out.println("EXPR: " + node.toString());
+			} else if (node instanceof IASTDeclarator) {
+				if (!declarations.containsKey(((IASTDeclarator) node).getName())) {
+				}
+				reportProblem("hu.ngms.opencl.editor.checkers.assignment_to_wrong_memory_space", node, node.toString());
+			} else {
+				System.out.println("NODE: " + node.toString());
+			}
+			check(node.getChildren());
 		}
+		level--;
 	}
 
 }
