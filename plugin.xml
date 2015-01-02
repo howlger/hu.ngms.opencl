@@ -23,7 +23,7 @@
      	<checker class="hu.ngms.opencl.editor.checkers.MemorySpaceChecker"
         		id="hu.ngms.opencl.editor.checkers.memory_space"
            		name="Incorrect use of memory spaces">
-        	<problem defaultSeverity="Warning" id="hu.ngms.opencl.editor.checkers.cast_to_wrong_memory_space"
+        	<problem defaultSeverity="Error" id="hu.ngms.opencl.editor.checkers.global_declaration_error"
            			name="Memory space of the cast is different from the memory space of the right value"/>
         	<problem defaultSeverity="Warning" id="hu.ngms.opencl.editor.checkers.assignment_to_wrong_memory_space"
            			name="Memory space of the declaration is different from the memory space of the right value"/>

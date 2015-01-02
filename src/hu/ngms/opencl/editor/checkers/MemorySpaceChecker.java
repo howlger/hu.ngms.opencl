@@ -14,13 +14,14 @@ import org.eclipse.cdt.core.dom.ast.IASTForStatement;
 import org.eclipse.cdt.core.dom.ast.IASTFunctionDefinition;
 import org.eclipse.cdt.core.dom.ast.IASTIfStatement;
 import org.eclipse.cdt.core.dom.ast.IASTNode;
-import org.eclipse.cdt.core.dom.ast.IASTStatement;
+import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclSpecifier;
+import org.eclipse.cdt.core.dom.ast.IASTSimpleDeclaration;
 import org.eclipse.cdt.core.dom.ast.IASTTranslationUnit;
 import org.eclipse.cdt.core.dom.ast.IASTWhileStatement;
+import org.eclipse.cdt.core.parser.IToken;
 
 /**
- * Checks for memory space usage-related errors, like variable assignments of or pointer
- * casts to different target memory space.
+ * Checks for memory space usage-related errors.
  * 
  * @author sragli@ngms.hu
  *
@@ -38,21 +39,40 @@ public class MemorySpaceChecker extends AbstractIndexAstChecker {
 	@Override
 	public void processAst(IASTTranslationUnit ast) {
 		declarations = new ConcurrentHashMap<String, String>();
-		
-		IASTDeclaration firstDecl = ast.getDeclarations()[0];
-		if (firstDecl instanceof IASTFunctionDefinition) {
-			IASTFunctionDefinition funcDecl = (IASTFunctionDefinition) firstDecl;
-			check(funcDecl.getBody());
+
+		for (IASTDeclaration decl : ast.getDeclarations()) {
+			System.out.println("NODE: " + decl.getOriginalNode().toString());
+
+			if (decl instanceof IASTFunctionDefinition) {
+				IASTFunctionDefinition funcDecl = (IASTFunctionDefinition) decl;
+				checkFunctions(funcDecl.getBody());
+			} else if (decl instanceof IASTSimpleDeclaration) {
+				try {
+					checkDefinition(decl.getOriginalNode());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
-	private void check(IASTStatement body) {
-		check(body.getChildren());
+	private void checkDefinition(IASTNode node) throws Exception {
+		IToken token = node.getLeadingSyntax();
+		boolean skipped = false;
+		while (token != null) {
+			String kw = token.toString();
+			if (kw.endsWith("global") || kw.equals("NULL")) {
+				skipped = true;
+			}
+			token = token.getNext();
+		}
+		if (!skipped) {
+			reportProblem("hu.ngms.opencl.editor.checkers.global_declaration_error", node);
+		}
 	}
 
-	// TODO check if memory space of the declared variable is different from the memory space of the right value
-	// TODO check if memory space of the cast is different from the memory space of the right value
-	private void check(IASTNode[] children) {
+	private void checkFunctions(IASTNode... children) {
 		for (IASTNode node: children) {
 			for (int i = 0; i < level; i++) {
 				System.out.print("  ");
@@ -71,11 +91,9 @@ public class MemorySpaceChecker extends AbstractIndexAstChecker {
 			} else if (node instanceof IASTDeclarator) {
 				if (!declarations.containsKey(((IASTDeclarator) node).getName())) {
 				}
-				reportProblem("hu.ngms.opencl.editor.checkers.assignment_to_wrong_memory_space", node, node.toString());
-			} else {
-				System.out.println("NODE: " + node.toString());
+				reportProblem("hu.ngms.opencl.editor.checkers.assignment_to_wrong_memory_space", node);
 			}
-			check(node.getChildren());
+			checkFunctions(node.getChildren());
 		}
 		level--;
 	}
