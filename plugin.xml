@@ -13,11 +13,11 @@
 	   	</editor>
 	</extension>
 	
-	 <extension point="org.eclipse.cdt.core.language">
-         <language class="hu.ngms.opencl.editor.OpenCLLanguage" id="gcc" name="GNU CPPN">
-           <contentType id="hu.ngms.opencl.cl_contenttype"/>
-      </language>
-   </extension>
+	<extension point="org.eclipse.cdt.core.language">
+     	<language class="hu.ngms.opencl.editor.OpenCLLanguage" id="gcc" name="GNU CPPN">
+        	<contentType id="hu.ngms.opencl.cl_contenttype"/>
+      	</language>
+    </extension>
 	
  	<extension point="org.eclipse.cdt.codan.core.checkers">
      	<checker class="hu.ngms.opencl.editor.checkers.MemorySpaceChecker"

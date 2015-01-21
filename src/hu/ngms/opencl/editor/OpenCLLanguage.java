@@ -1,12 +1,17 @@
 package hu.ngms.opencl.editor;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.eclipse.cdt.core.dom.ast.gnu.c.GCCLanguage;
+import org.eclipse.cdt.core.language.settings.providers.ILanguageSettingsProvider;
 import org.eclipse.cdt.core.model.ICLanguageKeywords;
+import org.eclipse.cdt.core.settings.model.ICConfigurationDescription;
+import org.eclipse.cdt.core.settings.model.ICLanguageSettingEntry;
+import org.eclipse.core.resources.IResource;
 
-public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords {
+public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords, ILanguageSettingsProvider {
 
 	private String[] keywords = new String[] {
 			"__global", "global", "__local", "local", "__constant", "constant", "__private", "private",
@@ -44,6 +49,13 @@ public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords {
 	@Override
 	public String[] getPreprocessorKeywords() {
 		return super.getPreprocessorKeywords();
+	}
+
+	@Override
+	public List<ICLanguageSettingEntry> getSettingEntries(ICConfigurationDescription cfgDescription, IResource rc,
+			String languageId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
