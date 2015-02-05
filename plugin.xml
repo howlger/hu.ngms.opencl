@@ -14,7 +14,7 @@
 	</extension>
 	
 	<extension point="org.eclipse.cdt.core.language">
-     	<language class="hu.ngms.opencl.editor.OpenCLLanguage" id="gcc" name="GNU CPPN">
+     	<language class="hu.ngms.opencl.editor.OpenCLLanguage" id="hu.ngms.opencl.language.keywords" name="OpenCL keywords">
         	<contentType id="hu.ngms.opencl.cl_contenttype"/>
       	</language>
     </extension>
