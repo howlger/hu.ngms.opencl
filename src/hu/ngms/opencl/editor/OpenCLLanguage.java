@@ -4,26 +4,15 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import org.eclipse.cdt.core.dom.ast.gnu.c.GCCLanguage;
-import org.eclipse.cdt.core.model.CoreModel;
 import org.eclipse.cdt.core.model.ICLanguageKeywords;
-import org.eclipse.core.runtime.Path;
 
 public class OpenCLLanguage extends GCCLanguage implements ICLanguageKeywords {
 
-	private String[] keywords = new String[] { "__global", "global", "__local", "local", "__constant", "constant",
+	public static String[] keywords = new String[] { "__global", "global", "__local", "local", "__constant", "constant",
 			"__private", "private", "__kernel", "kernel", "__read_only", "read_only", "__write_only", "write_only",
 			"__read_write", "read_write", "restrict" };
-	private String[] types = new String[] { "bool", "half" };
+	public static String[] types = new String[] { "bool", "half" };
 
-	public OpenCLLanguage() {
-		for (String keyword : keywords) {
-			CoreModel.newMacroEntry(Path.EMPTY, keyword, keyword);
-		}
-		for (String type : types) {
-			CoreModel.newMacroEntry(Path.EMPTY, type, type);
-		}
-	}
-	
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (ICLanguageKeywords.class.equals(adapter)) {
