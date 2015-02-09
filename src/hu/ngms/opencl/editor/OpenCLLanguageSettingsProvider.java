@@ -28,6 +28,5 @@ public class OpenCLLanguageSettingsProvider extends LanguageSettingsBaseProvider
 		}
 		return entries;
 	}
-	
 
 }
