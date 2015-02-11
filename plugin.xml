@@ -42,11 +42,4 @@
            			name="Memory space of the declaration is different from the memory space of the right value"/>
     	</checker>
 	</extension>
-  <extension point="org.eclipse.debug.ui.consoleLineTrackers">
-     <consoleLineTracker
-           class="hu.ngms.opencl.editor.analysis.ClangAnalyzer"
-           id="hu.ngms.opencl.editor.consoleLineTracker"
-           processType="hu.ngms.opencl.editor.consoleLineTracker">
-     </consoleLineTracker>
-  </extension>
 </plugin>
