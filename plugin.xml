@@ -42,4 +42,10 @@
            			name="Memory space of the declaration is different from the memory space of the right value"/>
     	</checker>
 	</extension>
+  <extension
+        point="org.eclipse.cdt.ui.LanguageSettingsProviderAssociation">
+     <id-association
+           id="hu.ngms.opencl.editor.settings_provider">
+     </id-association>
+  </extension>
 </plugin>
