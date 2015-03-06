@@ -2,6 +2,7 @@ package hu.ngms.opencl.editor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.cdt.core.language.settings.providers.LanguageSettingsBaseProvider;
 import org.eclipse.cdt.core.model.CoreModel;
@@ -18,12 +19,12 @@ public class OpenCLLanguageSettingsProvider extends LanguageSettingsBaseProvider
 	public List<ICLanguageSettingEntry> getSettingEntries(ICConfigurationDescription cfgDescription, IResource rc,
 			String languageId) {
 		List<ICLanguageSettingEntry> entries = new ArrayList<ICLanguageSettingEntry>();
-		for (String keyword : OpenCLLanguage.keywords) {
-			IMacroEntry macroEntry = CoreModel.newMacroEntry(Path.EMPTY, keyword, keyword);
+		for (Map.Entry<String, String> keyword : OpenCLLanguage.keywords.entrySet()) {
+			IMacroEntry macroEntry = CoreModel.newMacroEntry(Path.EMPTY, keyword.getKey(), keyword.getValue());
 			entries.add(CDataUtil.createCMacroEntry(macroEntry.getMacroName(), macroEntry.getMacroValue(), 0));
 		}
-		for (String type : OpenCLLanguage.types) {
-			IMacroEntry macroEntry = CoreModel.newMacroEntry(Path.EMPTY, type, type);
+		for (Map.Entry<String, String> type : OpenCLLanguage.types.entrySet()) {
+			IMacroEntry macroEntry = CoreModel.newMacroEntry(Path.EMPTY, type.getKey(), type.getValue());
 			entries.add(CDataUtil.createCMacroEntry(macroEntry.getMacroName(), macroEntry.getMacroValue(), 0));
 		}
 		return entries;
