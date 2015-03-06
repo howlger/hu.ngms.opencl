@@ -19,7 +19,8 @@
       	</language>
     </extension>
     
-    <extension point="org.eclipse.cdt.core.LanguageSettingsProvider">
+    <extension
+          point="org.eclipse.cdt.core.LanguageSettingsProvider">
 	    <provider
 	          id="hu.ngms.opencl.editor.settings_provider" name="OpenCL settings"
 	          class="hu.ngms.opencl.editor.OpenCLLanguageSettingsProvider">
@@ -45,7 +46,8 @@
   <extension
         point="org.eclipse.cdt.ui.LanguageSettingsProviderAssociation">
      <id-association
-           id="hu.ngms.opencl.editor.settings_provider">
+           id="hu.ngms.opencl.editor.settings_provider"
+           ui-edit-entries="true">
      </id-association>
   </extension>
 </plugin>
