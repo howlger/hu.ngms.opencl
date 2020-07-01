@@ -1,0 +1,8 @@
+<site><!-- shown in "Help > Install New Software..." -->
+    <category-def name="hu_ngms_opencl_category" label="OpenCL Development Tool (Fork)">
+        <description>OpenCL Development Tool is an IDE based on Eclipse CDT for developers writing kernels and host stubs in C, C++ and OpenCL language. The tool provides wizards creating OpenCL projects and kernels by one click. The editor provides syntax checking, error highlighting and offers solutions for typical errors. Also provides cheat sheets for best practices. (Fork of https://bitbucket.org/ngmsopencl/workspace/projects/PROJ)</description>
+    </category-def>
+    <feature id="hu.ngms.opencl.feature" version="0.0.0">
+        <category name="hu_ngms_opencl_category" />
+    </feature>
+</site>

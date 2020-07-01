@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.core.contenttype.contentTypes"> 
+		<content-type id="hu.ngms.opencl.cl_contenttype" name="OpenCL kernel source"
+			base-type="org.eclipse.core.runtime.text" file-extensions="cl"/>
+	</extension> 
+	
+	<extension point="org.eclipse.ui.editors">
+		<editor name="OpenCL editor" class="org.eclipse.cdt.internal.ui.editor.CEditor"
+				id="hu.ngms.opencl.editor">
+			<contentTypeBinding contentTypeId="hu.ngms.opencl.cl_contenttype"/>
+	   	</editor>
+	</extension>
+	
+	<extension point="org.eclipse.cdt.core.language">
+     	<language class="hu.ngms.opencl.editor.OpenCLLanguage" id="hu.ngms.opencl.language.keywords" name="OpenCL keywords">
+        	<contentType id="hu.ngms.opencl.cl_contenttype"/>
+      	</language>
+    </extension>
+    
+    <extension
+          point="org.eclipse.cdt.core.LanguageSettingsProvider">
+	    <provider
+	          id="hu.ngms.opencl.editor.settings_provider" name="OpenCL settings"
+	          class="hu.ngms.opencl.editor.OpenCLLanguageSettingsProvider">
+	    </provider>
+    </extension>
+    
+    <extension point="org.eclipse.cdt.managedbuilder.core.buildDefinitions">
+	    <configuration
+	          id="hu.ngms.opencl.editor.configuration" languageSettingsProviders="hu.ngms.opencl.editor.settings_provider">
+	    </configuration>
+    </extension>
+	
+ 	<extension point="org.eclipse.cdt.codan.core.checkers">
+     	<checker class="hu.ngms.opencl.editor.checkers.MemorySpaceChecker"
+        		id="hu.ngms.opencl.editor.checkers.memory_space"
+           		name="Incorrect use of memory spaces">
+        	<problem defaultSeverity="Error" id="hu.ngms.opencl.editor.checkers.global_declaration_error"
+           			name="Memory space of the cast is different from the memory space of the right value"/>
+        	<problem defaultSeverity="Warning" id="hu.ngms.opencl.editor.checkers.assignment_to_wrong_memory_space"
+           			name="Memory space of the declaration is different from the memory space of the right value"/>
+    	</checker>
+	</extension>
+  <extension
+        point="org.eclipse.cdt.ui.LanguageSettingsProviderAssociation">
+     <id-association
+           id="hu.ngms.opencl.editor.settings_provider"
+           ui-edit-entries="true">
+     </id-association>
+  </extension>
+</plugin>

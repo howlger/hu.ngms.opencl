@@ -1,6 +1,7 @@
-# README #
+#  OpenCL Editor
 
-This plugin creates an editor for OpenCL kernel source (based on the CDT C editor). In addition to the features of the default C editor, the plugin provides syntax highlighting for OpenCL keywords and checks the kernel code for invalid expressions using pre-defined validation rules. Validation rules are implemented as CODAN checkers.
+Fork of [`https://bitbucket.org/ngmsopencl/workspace/projects/PROJ`](https://bitbucket.org/ngmsopencl/workspace/projects/PROJ) to create an update site
 
-## Roadmap ##
-* CODAN checkers for invalid expressions.
+Update site: [`https://raw.githubusercontent.com/howlger/hu.ngms.opencl/update-site/staging`](https://raw.githubusercontent.com/howlger/hu.ngms.opencl/update-site/staging)
+
+See also the obsolete [_OpenCL Development Tool_ Eclipse Marketplace entry](https://marketplace.eclipse.org/content/opencl-development-tool) with a no more available update site
